@@ -1,0 +1,34 @@
+name: Pull Request
+
+on: [pull_request]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: ./bin/deploy.sh | tee deploy.log
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    - name: Get draft url
+      run: cat deploy.log | grep "Live Draft URL:" >> comments
+    - name: Post multi-line comments
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.comments_url }}
+      run: |
+        curl -X POST \
+             -H "Authorization: token ${GITHUB_TOKEN}" \
+             -d "{\"body\": \"$(cat comments)\"}" \
+             ${URL}
