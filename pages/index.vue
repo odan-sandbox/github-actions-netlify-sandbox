@@ -6,7 +6,7 @@
         github-actions-netlify-sandbox
       </h1>
       <h2 class="subtitle">
-        My wondrous Nuxt.js project
+        テストだよ
       </h2>
       <div class="links">
         <a
