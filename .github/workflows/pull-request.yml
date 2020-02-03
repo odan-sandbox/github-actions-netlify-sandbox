@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: yarn install --frozen-lockfile
     - run: ./bin/deploy.sh | tee deploy.log
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
