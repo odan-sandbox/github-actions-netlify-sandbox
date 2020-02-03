@@ -25,7 +25,7 @@ jobs:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
     - name: Get draft url
-      run: cat deploy.log | grep "Live Draft URL:" >> comments
+      run: cat deploy.log | grep 'Live Draft URL:' >> comments
     - name: Post multi-line comments
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
