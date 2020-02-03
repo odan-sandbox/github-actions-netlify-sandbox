@@ -13,5 +13,7 @@
   "dependencies": {
     "nuxt": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "netlify-cli": "^2.31.0"
+  }
 }
