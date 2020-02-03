@@ -18,7 +18,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --frozen-lockfile
-    - run: yarn build
-    - run: yarn generate
-      env:
-        CI: true
+    - run: ./bin/build.sh
+    - run: ./bin/deploy.sh
